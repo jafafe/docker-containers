@@ -42,18 +42,15 @@ ENV LANG=C.UTF-8
 
 RUN apk add --no-cache curl tar
 # java
-RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
-	&& chown root:root jdk-8u131-linux-x64.tar.gz \
-	&& tar -xzf jdk-8u131-linux-x64.tar.gz \
-	&& rm jdk-8u131-linux-x64.tar.gz \
-	&& mv jdk1.8.0_131 /usr/local/lib
+RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jre-8u131-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie' \
+	&& chown root:root jre-8u131-linux-x64.tar.gz \
+	&& tar -xzf jre-8u131-linux-x64.tar.gz \
+	&& rm jre-8u131-linux-x64.tar.gz \
+	&& mv jre1.8.0_131 /usr/local/lib
 
-WORKDIR /usr/local/lib/jdk1.8.0_131
+WORKDIR /usr/local/lib/jre1.8.0_131
 
-ENV JAVA_HOME /usr/local/lib/jdk1.8.0_131
+ENV JAVA_HOME /usr/local/lib/jre1.8.0_131
 ENV PATH $JAVA_HOME/bin:$PATH
 
-RUN rm $JAVA_HOME/src.zip $JAVA_HOME/javafx-src.zip
-
-RUN apk del --no-cache curl tar wget ca-certificates
-
+RUN apk del --no-cache curl tar # wget ca-certificates
