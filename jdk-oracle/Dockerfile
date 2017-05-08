@@ -2,7 +2,7 @@ FROM jafafe/base
 
 LABEL MAINTAINER "ricardojsmarques@gmail.com"
 
-# From "frolvlad/alpine-glibc" for the alpine 3.5 and 2.25 glic
+# From "frolvlad/alpine-glibc" for the alpine 3.5 and 2.25 glibc
 # Oracle JDK needs the glibc that do not come in alpine
 
 # Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
@@ -38,6 +38,7 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
 
 ENV LANG=C.UTF-8
+# FROM "frolvlad/alpine-glibc" for the alpine 3.5 and 2.5 glibc
 
 RUN apk add --no-cache curl tar
 # java
@@ -52,5 +53,5 @@ WORKDIR /usr/local/lib/jdk1.8.0_131
 ENV JAVA_HOME /usr/local/lib/jdk1.8.0_131
 ENV PATH $JAVA_HOME/bin:$PATH
 
-RUN apk del --no-cache curl tar
+RUN apk del --no-cache curl tar wget ca-certificates
 
